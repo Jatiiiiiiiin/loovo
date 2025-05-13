@@ -34,7 +34,7 @@ const slides = [
 function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const slideInterval = useRef(null)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const startSlideTimer = () => {
     stopSlideTimer()
@@ -86,8 +86,10 @@ function Hero() {
             <div className="slide-content">
               <h2>{slide.title}</h2>
               <p>{slide.description}</p>
-              <a href={slide.link} onClick={navigatetoall} className="cta-button">
-                {slide.cta}
+              <a>
+                <button onClick={navigatetoall} className="cta-button">
+                  {slide.cta}
+                </button>
               </a>
             </div>
           </div>
