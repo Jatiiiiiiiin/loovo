@@ -33,6 +33,16 @@ function Navbar() {
     navigate("/register"); // ✅
   };
 
+  const navigatetomen = () =>{
+    console.log("Navigating to men");
+    navigate("/men"); // ✅
+  };
+
+  const navigatetowomen = () =>{
+    console.log("Navigating to women");
+    navigate("/women")
+  };
+
   // Close the dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -61,8 +71,8 @@ function Navbar() {
         <nav className={`navbar-nav ${isMenuOpen ? "active" : ""}`}>
           <ul className="nav-links">
             <li><Link to="/">Home</Link></li>
-            <li><a href="/men">Men</a></li>
-            <li><a href="/women">Women</a></li>
+            <li><a onClick={navigatetomen}>Men</a></li>
+            <li><a onClick={navigatetowomen}>Women</a></li>
             <li><a href="/new-arrivals">New Arrivals</a></li>
             <li><a href="/sale">Sale</a></li>
           </ul>
