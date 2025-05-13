@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.containerr {
+    display: flex;
+    flex-wrap: wrap;
+    background-color:rgb(237, 237, 237);
+    flex-direction: row;
+    width: 100%;
+    align-items: left;
+
+}
+
+.box{
+    flex: 1 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    height: fit-content;
+    width: 250px;
+    margin-bottom: 40px;
+}
+
+.image{
+    width: 250px;
+    height: 300px;
+    overflow: hidden;
+    display: block;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+
+.text{
+    height: fit-content;
+    overflow: hidden;
+    max-width: 250px;
+}
+
+.text h1{
+    font-size: 16px;
+    display: -webkit-box;
+  -webkit-line-clamp: 1;   /* Show only 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2em;
+  max-height: 2.4em; 
+}
+
+.image .img {
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    display:block;
+}
+
+.box p{
+    overflow: hidden;
+}
+
+.text p{
+    font-size: 16px;
+    color: red;
+    font-weight: 600;
+}
+
+.text button:nth-of-type(1){
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    margin: auto;
+    width: 50%;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    background-color: red;
+    color: #fff;
+    font-weight: 500;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.text button:nth-of-type(2){
+    background-color:rgb(79, 207, 79);
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    margin: auto;
+    width: 50%;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    color: #000;
+    font-weight: 500;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.product{
+    background-color: #fff;
+    height: fit-content;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: right;
+
+}
+
+.product h1{
+    font-size: 16px;
+    font-weight: 500;
+}

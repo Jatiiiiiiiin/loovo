@@ -1,0 +1,99 @@
+.featured-collections {
+  padding: 4rem 0;
+  background-color: #f9f9f9;
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.collection-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s;
+}
+
+.collection-card:hover {
+  transform: translateY(-5px);
+}
+
+.collection-card.summer {
+  background: linear-gradient(to bottom right, #fff8f0, #ffecf1);
+}
+
+.collection-card.activewear {
+  background: linear-gradient(to bottom right, #f0f8ff, #e6f7ff);
+}
+
+.collection-card.accessories {
+  background: linear-gradient(to bottom right, #f5f0ff, #eee6ff);
+}
+
+.collection-image {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.collection-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collection-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.collection-card p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.collection-link {
+  display: inline-flex;
+  align-items: center;
+  color: #ff3e78;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.collection-card.activewear .collection-link {
+  color: #4a90e2;
+}
+
+.collection-link svg {
+  margin-left: 0.5rem;
+  transition: transform 0.3s;
+}
+
+.collection-link:hover {
+  text-decoration: underline;
+}
+
+.collection-link:hover svg {
+  transform: translateX(3px);
+}
+
+@media (max-width: 1024px) {
+  .collections-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .collections-grid {
+    grid-template-columns: 1fr;
+  }
+}
