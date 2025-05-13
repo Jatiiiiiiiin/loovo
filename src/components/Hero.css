@@ -2,6 +2,7 @@
   position: relative;
   height: 500px;
   overflow: hidden;
+  background: #f7f7f7; /* Default background for better visibility */
 }
 
 .slider {
@@ -72,6 +73,7 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* Controls */
 .slider-controls {
   position: absolute;
   bottom: 20px;
@@ -120,12 +122,37 @@
   background-color: white;
 }
 
+/* Mobile responsiveness */
 @media (max-width: 768px) {
+  .hero {
+    height: 350px; /* Adjust height for mobile */
+  }
+
   .slide-content h2 {
-    font-size: 2rem;
+    font-size: 1.8rem; /* Smaller font size for mobile */
   }
 
   .slide-content p {
+    font-size: 1rem; /* Smaller font size for mobile */
+  }
+
+  .cta-button {
+    padding: 0.6rem 1.5rem;
     font-size: 1rem;
+  }
+
+  .slider-controls {
+    bottom: 15px;
+  }
+
+  .prev-button,
+  .next-button {
+    width: 35px;
+    height: 35px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
   }
 }

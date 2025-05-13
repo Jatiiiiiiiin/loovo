@@ -1,3 +1,4 @@
+/* General Styles (Desktop and Mobile) */
 .testimonials {
   padding: 4rem 0;
 }
@@ -91,14 +92,47 @@
   cursor: not-allowed;
 }
 
+/* Desktop and Larger Screens (Starting from 768px) */
 @media (min-width: 768px) {
   .testimonial-card {
-    --visible-count: 2;
+    --visible-count: 2; /* Show 2 testimonials on medium screens */
   }
 }
 
+/* Larger Desktop Screens (1024px and above) */
 @media (min-width: 1024px) {
   .testimonial-card {
-    --visible-count: 3;
+    --visible-count: 3; /* Show 3 testimonials on large screens */
+  }
+}
+
+/* Mobile Screens (Below 768px) */
+@media (max-width: 768px) {
+  .testimonials-container {
+    display: block; /* Stack testimonials vertically */
+  }
+
+  .testimonial-card {
+    flex: 0 0 100%; /* Ensure each testimonial takes full width */
+    margin: 1rem 0; /* Space between testimonials */
+  }
+
+  .testimonials-controls {
+    flex-direction: column;
+  }
+
+  .control-button {
+    width: 35px;
+    height: 35px;
+    margin: 0.5rem 0; /* Adjust margin for smaller buttons on mobile */
+  }
+
+  .testimonial-header {
+    flex-direction: column; /* Stack avatar and text vertically */
+    align-items: center;
+  }
+
+  .testimonial-avatar {
+    margin-bottom: 1rem; /* Add spacing between avatar and name */
   }
 }

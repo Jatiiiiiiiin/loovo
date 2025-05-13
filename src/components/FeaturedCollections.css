@@ -1,3 +1,4 @@
+/* Featured Collections Styles */
 .featured-collections {
   padding: 4rem 0;
   background-color: #f9f9f9;
@@ -5,7 +6,7 @@
 
 .collections-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* 3 columns for desktop */
   gap: 2rem;
 }
 
@@ -86,14 +87,15 @@
   transform: translateX(3px);
 }
 
+/* Mobile Responsiveness */
 @media (max-width: 1024px) {
   .collections-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablet-sized screens */
   }
 }
 
 @media (max-width: 768px) {
   .collections-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* 1 column for mobile screens */
   }
 }

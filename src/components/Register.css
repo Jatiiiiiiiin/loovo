@@ -1,11 +1,9 @@
-/* Register Page Container */
 .register-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #f7f7f7;
-  font-family: 'Arial', sans-serif;
 }
 
 .register-form {
@@ -19,9 +17,9 @@
 
 .register-form h2 {
   text-align: center;
-  margin-bottom: 20px; /* Controls the distance between the heading and form */
+  margin-bottom: 20px;
   color: #333;
-  font-size: 24px; /* Adjust font size for prominence */
+  font-size: 24px;
 }
 
 .register-form .form-group {
@@ -48,7 +46,7 @@
   width: 100%;
   padding: 14px;
   background-color: #3498db;
-  color: #fff;
+  color: white;
   border: none;
   border-radius: 4px;
   font-size: 16px;
