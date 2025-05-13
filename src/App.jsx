@@ -14,7 +14,7 @@ import { CartProvider } from "./context/Cartcontext";
 import Cart from "./components/Cart";
 import Register from "./components/Register";
 import { AuthProvider } from './context/AuthContext';
-import AllCollection from "./pages/allCollection";
+import AllCollection from "./pages/AllCollection";
 
 function HomePage() {
   return (
