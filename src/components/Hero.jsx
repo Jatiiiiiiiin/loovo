@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import "./Hero.css"
+import { useNavigate } from "react-router-dom"
 
 const slides = [
   {
@@ -33,6 +34,7 @@ const slides = [
 function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const slideInterval = useRef(null)
+  const navigate = useNavigate()
 
   const startSlideTimer = () => {
     stopSlideTimer()
@@ -67,6 +69,11 @@ function Hero() {
     startSlideTimer()
   }
 
+  const navigatetoall = () => {
+    // Add your navigation logic here
+    console.log("Navigating to all collections")
+    navigate("/sale")
+  }
   return (
     <div className="hero">
       <div className="slider">
@@ -79,7 +86,7 @@ function Hero() {
             <div className="slide-content">
               <h2>{slide.title}</h2>
               <p>{slide.description}</p>
-              <a href={slide.link} to="/allCollection" className="cta-button">
+              <a href={slide.link} onClick={navigatetoall} className="cta-button">
                 {slide.cta}
               </a>
             </div>
@@ -130,6 +137,7 @@ function Hero() {
       </div>
     </div>
   )
+
 }
 
 export default Hero
