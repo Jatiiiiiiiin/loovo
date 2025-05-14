@@ -24,11 +24,17 @@ export function WishlistProvider({ children }) {
   }, [currentUser]);
 
   const saveWishlist = async (updatedWishlist) => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      alert("Please log in to save your wishlist.");
+      return;
+    }
+    try {
     const docRef = doc(db, "wishlists", currentUser.uid);
     await setDoc(docRef, { items: updatedWishlist });
+  } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
   };
-
   const addToWishlist = (item) => {
     const exists = wishlist.find((i) => i.id === item.id);
     if (exists) return;
