@@ -63,6 +63,20 @@ function Navbar() {
     };
   }, []);
 
+
+  const handleLogout = () => {
+  // Clear auth-related data
+  localStorage.removeItem("user"); // Or whatever key you used
+  localStorage.removeItem("token"); // Optional: token/key if stored
+
+  // Redirect to login
+  navigate("/login");
+
+  // Optionally, show a message or toast
+  console.log("Logged out successfully");
+};
+
+
   return (
     <header className="navbar">
       <div className="navbar-container">
@@ -112,6 +126,7 @@ function Navbar() {
                 <a><button onClick={navivatetoregister}>Signup</button></a>
                 <a href="/profile">My Profile</a>
                 <a href="/orders">Orders</a>
+                <a><button onClick={handleLogout}>Log Out</button></a>
               </div>
             )}
           </div>
