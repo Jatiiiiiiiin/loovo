@@ -15,6 +15,9 @@ import Cart from "./components/Cart";
 import Register from "./components/Register";
 import { AuthProvider } from './context/AuthContext';
 import AllCollection from "./pages/AllCollection";
+import { WishlistProvider } from "./context/WishlistContext";
+import Wish from "./components/Wish";
+
 
 function HomePage() {
   return (
@@ -34,6 +37,7 @@ function App() {
   return (
     <AuthProvider> 
       <CartProvider>
+        <WishlistProvider>
         <Router>
           <div className="app">
             <Navbar />
@@ -45,10 +49,12 @@ function App() {
               <Route path="/women" element={<Women />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/sale" element={<AllCollection />} />
+              <Route path="/wishlist" element={<Wish />} />
             </Routes>
             <Footer />
           </div>
         </Router>
+        </WishlistProvider>
       </CartProvider>
     </AuthProvider>
   );

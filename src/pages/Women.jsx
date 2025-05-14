@@ -7,6 +7,7 @@ function Women() {
   //https://fakestoreapi.com/products
   const [products, setProducts] = useState([]);
   const {addToCart} = useCart();
+  const [likedItems, setLikedItems] = useState({});
 
   useEffect(() => {
       fetch("https://fakestoreapi.com/products")
@@ -16,6 +17,12 @@ function Women() {
           setProducts(mensClothing);
         });
     }, []);
+    const toggleLike = (id) => {
+    setLikedItems((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   return (
     <>
@@ -40,7 +47,12 @@ function Women() {
                   quantity: 1, // default quantity of 1
                 })}>Add to Cart</button>
 
-                <button>Buy Now</button>
+                <button
+                  className={`heart-button ${likedItems[product.id] ? 'liked' : ''}`}
+                  onClick={() => toggleLike(product.id)}
+                >
+                  {likedItems[product.id] ? '❤️' : '♡'}
+                </button>
               </div>
             </div>
           </div>

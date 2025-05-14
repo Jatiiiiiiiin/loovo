@@ -8,6 +8,14 @@ function AllCollection() {
   //https://fakestoreapi.com/products
   const [products, setProducts] = useState([]);
   const {addToCart} = useCart();
+  const [likedItems, setLikedItems] = useState({});
+
+  const toggleLike = (id)=>{
+    setLikedItems((prev)=>({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  }
 
   useEffect(() => {
       fetch("https://fakestoreapi.com/products")
@@ -41,7 +49,12 @@ function AllCollection() {
                   quantity: 1, // default quantity of 1
                 })}>Add to Cart</button>
 
-                <button>Buy Now</button>
+                <button
+                  className={`heart-button ${likedItems[product.id] ? 'liked' : ''}`}
+                  onClick={() => toggleLike(product.id)}
+                >
+                  {likedItems[product.id] ? '❤️' : '♡'}
+                </button>
               </div>
             </div>
           </div>

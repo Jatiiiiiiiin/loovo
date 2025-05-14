@@ -70,16 +70,14 @@
 }
 
 .text button:nth-of-type(1){
-    padding: 5px 10px;
     cursor: pointer;
-    font-size: 14px;
     margin-top: 10px;
     margin: auto;
-    width: 50%;
-    border-radius: 3px;
+    width: 70%;
+    border-radius: 5px;
     transition: all 0.3s ease;
-    background-color: red;
-    color: #fff;
+    border: 3px solid black;
+    color: black;
     font-weight: 500;
     padding: 10px 10px;
     cursor: pointer;
@@ -88,20 +86,13 @@
 
 
 .text button:nth-of-type(2){
-    background-color:rgb(79, 207, 79);
-    padding: 5px 10px;
+    padding: 10px;
     cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
     margin: auto;
-    width: 50%;
-    border-radius: 3px;
-    transition: all 0.3s ease;
-    color: #000;
+    padding-top: 10px;
+    width: 30%;
     font-weight: 500;
-    padding: 10px 10px;
-    cursor: pointer;
-    font-size: 16px;
+    font-size: 40px;
 }
 
 .product{
@@ -116,4 +107,21 @@
 .product h1{
     font-size: 16px;
     font-weight: 500;
+}
+
+.heart-button {
+  padding: 10px;
+  margin: auto;
+  width: 30%;
+  font-weight: 500;
+  font-size: 40px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.heart-button.liked {
+  color: red;
+  transform: scale(1.1);
 }

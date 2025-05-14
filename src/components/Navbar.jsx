@@ -2,11 +2,15 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom"; // ✅
 import "./Navbar.css";
 import account from "../assets/account.png";
-import wishlist from "../assets/wishlist.png";
+import {useWishlist} from "../context/WishlistContext";
+import like from "../assets/like.png";
 import cart from "../assets/cart.png";
 import { useCart } from "../context/Cartcontext"; // adjust the path as needed
 
 function Navbar() {
+
+  const { wishlist } = useWishlist();
+
   const { totalItems } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
@@ -33,15 +37,16 @@ function Navbar() {
     navigate("/register"); // ✅
   };
 
-  const navigatetomen = () =>{
+  const navigatetomen = () => {
     console.log("Navigating to men");
     navigate("/men"); // ✅
   };
 
-  const navigatetowomen = () =>{
+  const navigatetowomen = () => {
     console.log("Navigating to women");
     navigate("/women")
   };
+
 
   // Close the dropdown when clicking outside
   useEffect(() => {
@@ -94,9 +99,10 @@ function Navbar() {
         </div>
 
         <div className="navbar-right">
-          <div className="wishlist" id="icon">
-            <img src={wishlist} alt="" />
-          </div>
+          <Link to="/wishlist" className="wishlist" id="icon">
+            <img src={like} alt="wishlist" />
+            <span className="cart-count">{wishlist.length}</span> 
+          </Link>
 
           <div className="account" id="icon" onClick={toggleAccountDropdown}>
             <img src={account} alt="" />

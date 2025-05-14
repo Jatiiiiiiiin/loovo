@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../context/Cartcontext';
+import { useWishlist } from '../context/WishlistContext'; // 👈 Add this
 import './men.css';
 
 function Men() {
   const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist(); // 👈 Use these
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -14,6 +16,14 @@ function Men() {
         setProducts(mensClothing);
       });
   }, []);
+
+  const toggleWishlist = (product) => {
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
+    }
+  };
 
   return (
     <>
@@ -31,14 +41,19 @@ function Men() {
                 <h1>{product.title}</h1>
                 <p>${product.price}</p>
                 <button onClick={() => addToCart({
-                  id: product.id, // same as allcollection
+                  id: product.id,
                   title: product.title,
                   price: product.price,
                   image: product.image,
-                  quantity: 1, // default quantity of 1
+                  quantity: 1,
                 })}>Add to Cart</button>
 
-                <button>Buy Now</button>
+                <button
+                  className={`heart-button ${isInWishlist(product.id) ? 'liked' : ''}`}
+                  onClick={() => toggleWishlist(product)}
+                >
+                  {isInWishlist(product.id) ? '❤️' : '♡'}
+                </button>
               </div>
             </div>
           </div>
