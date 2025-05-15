@@ -58,7 +58,7 @@ function Navbar() {
   };
 
   const clearWishlist = () => {
-    
+
   };
   // Close the dropdown when clicking outside
   useEffect(() => {
@@ -93,7 +93,7 @@ function Navbar() {
           <button className="menu-toggle" onClick={toggleMenu}>
             <span className="menu-icon"></span>
           </button>
-          <Link to="/" className="logo">LOOVO</Link> {/* ✅ */}
+          <Link to="/" className="logo">LOOVO</Link>
         </div>
 
         <nav className={`navbar-nav ${isMenuOpen ? "active" : ""}`}>
