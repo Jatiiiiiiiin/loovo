@@ -52,7 +52,7 @@ function Men() {
                   className={`heart-button ${isInWishlist(product.id) ? 'liked' : ''}`} //ternary operator jisse pata chalega ki product wishlist me hai ya nahi
                   onClick={() => toggleWishlist(product)} //toggleWishlist function ko call karne ke liye
                 >
-                  {isInWishlist(product.id) ? '❤️' : '♡'} //yeh button ko toggle karne ke liye hai //toggle ka matlab hai ki agar product wishlist me hai to remove kar do aur agar nahi hai to add kar do
+                  {isInWishlist(product.id) ? '❤️' : '♡'} 
                 </button>
               </div>
             </div>
