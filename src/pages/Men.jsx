@@ -18,10 +18,10 @@ function Men() {
   }, []);
 
   const toggleWishlist = (product) => {
-    if (isInWishlist(product.id)) {
-      removeFromWishlist(product.id);
+    if (isInWishlist(product.id)) {  //check ke product already wishlist me hai ya nahi
+      removeFromWishlist(product.id); //agr hai to remove kar do
     } else {
-      addToWishlist(product);
+      addToWishlist(product); //agr nahi hai to add kar do
     }
   };
 
@@ -49,10 +49,10 @@ function Men() {
                 })}>Add to Cart</button>
 
                 <button
-                  className={`heart-button ${isInWishlist(product.id) ? 'liked' : ''}`}
-                  onClick={() => toggleWishlist(product)}
+                  className={`heart-button ${isInWishlist(product.id) ? 'liked' : ''}`} //ternary operator jisse pata chalega ki product wishlist me hai ya nahi
+                  onClick={() => toggleWishlist(product)} //toggleWishlist function ko call karne ke liye
                 >
-                  {isInWishlist(product.id) ? '❤️' : '♡'}
+                  {isInWishlist(product.id) ? '❤️' : '♡'} //yeh button ko toggle karne ke liye hai //toggle ka matlab hai ki agar product wishlist me hai to remove kar do aur agar nahi hai to add kar do
                 </button>
               </div>
             </div>
