@@ -1,7 +1,6 @@
-// src/context/AuthContext.jsx
 import { createContext, useContext, useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase"; 
+import { auth } from "../firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -13,11 +12,16 @@ export const AuthProvider = ({ children }) => {
       setCurrentUser(user);
     });
 
-    return () => unsubscribe(); // chnges ye detect karega
+    return () => unsubscribe();
   }, []);
 
+  const logout = async () => {
+    await signOut(auth);
+    setCurrentUser(null); // triggers reactivity
+  };
+
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ currentUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -2,26 +2,28 @@ import React from 'react'
 import "./men.css"
 import { useEffect, useState } from 'react'
 import { useCart } from '../context/Cartcontext';
+import { useWishlist } from '../context/WishlistContext'; // Import the Wishlist context
 
 function Women() {
   //https://fakestoreapi.com/products
   const [products, setProducts] = useState([]);
   const {addToCart} = useCart();
-  const [likedItems, setLikedItems] = useState({});
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();;
 
   useEffect(() => {
       fetch("https://fakestoreapi.com/products")
         .then(res => res.json())
         .then(data => {
-          const mensClothing = data.filter(item => item.category === "women's clothing");
-          setProducts(mensClothing);
+          const womensClothing = data.filter(item => item.category === "women's clothing");
+          setProducts(womensClothing);
         });
     }, []);
-    const toggleLike = (id) => {
-    setLikedItems((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+    const toggleWishlist = (product) => {
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
+    }
   };
 
   return (
@@ -48,10 +50,10 @@ function Women() {
                 })}>Add to Cart</button>
 
                 <button
-                  className={`heart-button ${likedItems[product.id] ? 'liked' : ''}`}
-                  onClick={() => toggleLike(product.id)}
+                  className={`heart-button ${isInWishlist(product.id) ? 'liked' : ''}`}
+                  onClick={() => toggleWishlist(product)}
                 >
-                  {likedItems[product.id] ? '❤️' : '♡'}
+                  {isInWishlist(product.id) ? '❤️' : '♡'}
                 </button>
               </div>
             </div>

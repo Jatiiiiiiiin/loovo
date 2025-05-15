@@ -13,22 +13,27 @@ export function CartProvider({ children }) {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    if (currentUser) {
-      // jab user login hoga to real time products to fetch krega
-      const cartRef = collection(db, 'users', currentUser.uid, 'cart');
-      const unsubscribe = onSnapshot(cartRef, (snapshot) => {
-        const cartItems = snapshot.docs.map(doc => doc.data());
-        let price = 0;
-        cartItems.forEach(item => price += item.price * item.quantity);
-        setCart(cartItems);
-        setTotalPrice(price);
-        setTotalItems(cartItems.length);
-      });
+  if (!currentUser) {
+    setCart([]);        // Clear cart
+    setTotalItems(0);   // Clear total items
+    setTotalPrice(0);   // Clear total price
+    return;             // Exit early if user is not logged in
+  }
 
-      // agar change karunga ya remove karunga to iska kya hoga
-      return () => unsubscribe();
-    }
-  }, [currentUser]);
+  const cartRef = collection(db, 'users', currentUser.uid, 'cart');
+
+  const unsubscribe = onSnapshot(cartRef, (snapshot) => {
+    const cartItems = snapshot.docs.map(doc => doc.data());
+    let price = 0;
+    cartItems.forEach(item => price += item.price * item.quantity);
+
+    setCart(cartItems);
+    setTotalPrice(price);
+    setTotalItems(cartItems.length);
+  });
+
+  return () => unsubscribe(); // Clean up listener on unmount or user switch
+}, [currentUser]);
 
   const addToCart = async (item) => {
     if (!currentUser) {

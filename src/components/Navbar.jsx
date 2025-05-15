@@ -5,10 +5,11 @@ import account from "../assets/account.png";
 import {useWishlist} from "../context/WishlistContext";
 import like from "../assets/like.png";
 import cart from "../assets/cart.png";
-import { useCart } from "../context/Cartcontext"; // adjust the path as needed
-
+import { useCart } from "../context/Cartcontext"; 
+import { useAuth } from "../context/AuthContext"; // ✅
 function Navbar() {
 
+  const { logout } = useAuth();
   const { wishlist } = useWishlist();
 
   const { totalItems } = useCart();
@@ -62,20 +63,17 @@ function Navbar() {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
-
-
-  const handleLogout = () => {
-  // Clear auth-related data
-  localStorage.removeItem("user"); // Or whatever key you used
-  localStorage.removeItem("token"); // Optional: token/key if stored
-
-  // Redirect to login
-  navigate("/login");
-
-  // Optionally, show a message or toast
-  console.log("Logged out successfully");
-};
-
+  // Logout function
+  const handleLogout = async () => {
+    try {
+      await logout();           // Firebase logout
+      clearCart();              // Clear cart from state
+      clearWishlist();          // Clear wishlist from state
+      navigate("/login");       // Redirect
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
+  };
 
   return (
     <header className="navbar">

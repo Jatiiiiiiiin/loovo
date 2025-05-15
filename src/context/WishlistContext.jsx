@@ -11,17 +11,27 @@ export function WishlistProvider({ children }) {
 
   // Load wishlist from Firestore when user logs in
   useEffect(() => {
-    if (currentUser) {
-      const fetchWishlist = async () => {
-        const docRef = doc(db, "wishlists", currentUser.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setWishlist(docSnap.data().items || []);
-        }
-      };
-      fetchWishlist();
+  if (!currentUser) {
+    setWishlist([]); // ✅ Clear wishlist on logout
+    return;
+  }
+
+  const fetchWishlist = async () => {
+    try {
+      const docRef = doc(db, "wishlists", currentUser.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setWishlist(docSnap.data().items || []);
+      } else {
+        setWishlist([]);
+      }
+    } catch (error) {
+      console.error("Error fetching wishlist:", error);
     }
-  }, [currentUser]);
+  };
+
+  fetchWishlist();
+}, [currentUser]);
 
   const saveWishlist = async (updatedWishlist) => {
     if (!currentUser) {
