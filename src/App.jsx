@@ -17,6 +17,8 @@ import { AuthProvider } from './context/AuthContext';
 import AllCollection from "./pages/AllCollection";
 import { WishlistProvider } from "./context/WishlistContext";
 import Wish from "./components/Wish";
+import AddressForm from "./components/AddressForm";
+import Profile from "./pages/Profile";
 
 
 function HomePage() {
@@ -50,6 +52,8 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/sale" element={<AllCollection />} />
               <Route path="/wishlist" element={<Wish />} />
+              <Route path="/address" element={<AddressForm />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
             <Footer />
           </div>

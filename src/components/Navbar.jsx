@@ -32,7 +32,7 @@ function Navbar() {
     navigate("/login"); // ✅
   };
 
-  const navivatetoregister = () => {
+  const navigatetoregister = () => {
     setIsAccountOpen(false);
     console.log("Navigating to register");
     navigate("/register"); // ✅
@@ -48,7 +48,18 @@ function Navbar() {
     navigate("/women")
   };
 
+  const navigatetoprofile = () => {
+    setIsAccountOpen(false);
+    console.log("Navigating to profile");
+    navigate("/profile"); // ✅
+  };
+  const clearCart = () => {
 
+  };
+
+  const clearWishlist = () => {
+    
+  };
   // Close the dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -121,8 +132,8 @@ function Navbar() {
             {isAccountOpen && (
               <div className="account-dropdown">
                 <a><button onClick={navigatetologin}>Login</button></a>
-                <a><button onClick={navivatetoregister}>Signup</button></a>
-                <a href="/profile">My Profile</a>
+                <a><button onClick={navigatetoregister}>Signup</button></a>
+                <a><button onClick={navigatetoprofile}>My Profile</button></a>
                 <a href="/orders">Orders</a>
                 <a><button onClick={handleLogout}>Log Out</button></a>
               </div>
