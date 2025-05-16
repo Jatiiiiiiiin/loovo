@@ -7,6 +7,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [username, setUsername] = useState(""); // Added username state
 
   const navigate = useNavigate();
 
@@ -14,7 +15,7 @@ export default function Login() {
     e.preventDefault();
     try {
       // Use the modular API for Firebase v9+
-      await signInWithEmailAndPassword(auth, email, password); // Correct usage of the modular API
+      await signInWithEmailAndPassword(auth, username, email, password); // Correct usage of the modular API
       alert("Login successful");
       // You can add a redirect here, e.g., navigate to another page
       navigate('/');
@@ -28,6 +29,13 @@ export default function Login() {
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
+        <input
+          type="Name"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter your name"
+          required
+        />
         <input
           type="email"
           value={email}

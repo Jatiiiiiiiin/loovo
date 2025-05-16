@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app'; // Firebase initialization
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'; // Correct imports for Firebase v9+
 import { getFirestore } from 'firebase/firestore'; // Firestore imports (if needed)
+import { updateProfile } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCa8_WlzyQ51ifZeTu7IPp4rOsn56kWQq8",

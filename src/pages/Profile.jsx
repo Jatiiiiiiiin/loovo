@@ -42,7 +42,7 @@ function Profile() {
 
     {userData && (
       <div className="profile-info">
-        <p><strong>Name:</strong> {userData.name || "N/A"}</p>
+        <p><strong>Name:</strong> {userData.username || "N/A"}</p>
         <p><strong>Email:</strong> {currentUser.email}</p>
       </div>
     )}
