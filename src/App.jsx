@@ -14,11 +14,13 @@ import { CartProvider } from "./context/Cartcontext";
 import Cart from "./components/Cart";
 import Register from "./components/Register";
 import { AuthProvider } from './context/AuthContext';
-import AllCollection from "./pages/AllCollection";
+import AllCollection from "./pages/allCollection";
 import { WishlistProvider } from "./context/WishlistContext";
 import Wish from "./components/Wish";
 import AddressForm from "./components/AddressForm";
 import Profile from "./pages/Profile";
+import Electronics from "./pages/Electronics";
+import Footwear from "./pages/Footwear";
 
 
 function HomePage() {
@@ -54,6 +56,8 @@ function App() {
               <Route path="/wishlist" element={<Wish />} />
               <Route path="/address" element={<AddressForm />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/electronics" element={<Electronics />} />
+              <Route path="/footwear" element={<Footwear />} />
             </Routes>
             <Footer />
           </div>

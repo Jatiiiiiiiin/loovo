@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
+import "./AddressForm.css"; // ✅ Import the CSS
 
 function AddressForm() {
   const { currentUser } = useAuth();
@@ -43,37 +44,46 @@ function AddressForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: "400px", margin: "20px auto" }}>
-      <h2>Update Address</h2>
+    <form onSubmit={handleSubmit} className="address-form">
+      <h2 className="address-heading">Update Address</h2>
+
       <input
         name="street"
         placeholder="Street"
         value={address.street}
         onChange={handleChange}
+        className="address-input"
         required
-      /><br />
+      />
+
       <input
         name="city"
         placeholder="City"
         value={address.city}
         onChange={handleChange}
+        className="address-input"
         required
-      /><br />
+      />
+
       <input
         name="pincode"
         placeholder="Pincode"
         value={address.pincode}
         onChange={handleChange}
+        className="address-input"
         required
-      /><br />
+      />
+
       <input
         name="country"
         placeholder="Country"
         value={address.country}
         onChange={handleChange}
+        className="address-input"
         required
-      /><br />
-      <button type="submit">Save Address</button>
+      />
+
+      <button type="submit" className="address-button">Save Address</button>
     </form>
   );
 }

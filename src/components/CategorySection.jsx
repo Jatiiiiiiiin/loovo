@@ -16,6 +16,16 @@ function CategorySection() {
     navigate("/women")
   };
 
+  const navigatetoelec = () =>{
+    console.log("Navigating to electronics");
+    navigate("/electronics")
+  };
+
+  const navigatetofoot = () =>{
+    console.log("Navigating to footwear");
+    navigate("/footwear")
+  }
+
   return (
     <section className="category-section">
       <h2 className="section-title">Shop By Category</h2>
@@ -53,8 +63,9 @@ function CategorySection() {
           <div className="category-content">
             <h3>Electronics</h3>
             <p>Complete your look with our stylish range of accessories</p>
-            <a href="/accessories" className="category-button accessories">
+            <a><button onClick={navigatetoelec} className="category-button electronics">
               Shop Accessories
+            </button>
             </a>
           </div>
         </div>
@@ -66,9 +77,9 @@ function CategorySection() {
           <div className="category-content">
             <h3>Footwear</h3>
             <p>Step out in style with our premium collection of footwear</p>
-            <a href="/footwear" className="category-button footwear">
-              Shop Footwear
-            </a>
+            <a><button onClick={navigatetofoot} className="category-button footwear">
+              Shop Footwears
+            </button></a>
           </div>
         </div>
       </div>

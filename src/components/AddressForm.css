@@ -1,0 +1,49 @@
+/* AddressForm.css */
+
+.address-form {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.address-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.address-form input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.address-form input:focus {
+  border-color: #5a67d8;
+  outline: none;
+  background-color: #fefefe;
+}
+
+.address-form button {
+  background-color: #5a67d8;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.address-form button:hover {
+  background-color: #434190;
+}

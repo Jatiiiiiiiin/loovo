@@ -66,4 +66,4 @@ function AllCollection() {
   );
 }
 
-export default AllCollection
+export default AllCollection;
