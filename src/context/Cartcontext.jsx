@@ -12,6 +12,13 @@ export function CartProvider({ children }) {
 
   const { currentUser } = useAuth();
 
+  const clearCart = () => {
+  setCart([]);  // or however you reset your cart state
+  setTotalItems(0);
+  setTotalPrice(0);
+};
+
+
   useEffect(() => {
   if (!currentUser) {
     setCart([]);        // Clear cart
@@ -66,7 +73,7 @@ export function CartProvider({ children }) {
   };
 
   return (
-    <cartContext.Provider value={{ cart, totalPrice, totalItems, addToCart, removeFromCart }}>
+    <cartContext.Provider value={{ cart, totalPrice, totalItems, addToCart, removeFromCart, clearCart }}>
       {children}
     </cartContext.Provider>
   );

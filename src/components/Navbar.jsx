@@ -53,6 +53,13 @@ function Navbar() {
     console.log("Navigating to profile");
     navigate("/profile"); // ✅
   };
+
+
+  const navigatetoorder = () => {
+    setIsAccountOpen(false);
+    console.log("Navigating to order");
+    navigate("/order"); // ✅
+  }
   const clearCart = () => {
 
   };
@@ -134,7 +141,7 @@ function Navbar() {
                 <a><button onClick={navigatetologin}>Login</button></a>
                 <a><button onClick={navigatetoregister}>Signup</button></a>
                 <a><button onClick={navigatetoprofile}>My Profile</button></a>
-                <a href="/orders">Orders</a>
+                <a><button onClick={navigatetoorder}>Orders</button></a>
                 <a><button onClick={handleLogout}>Log Out</button></a>
               </div>
             )}

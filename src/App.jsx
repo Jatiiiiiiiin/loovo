@@ -21,6 +21,7 @@ import AddressForm from "./components/AddressForm";
 import Profile from "./pages/Profile";
 import Electronics from "./pages/Electronics";
 import Footwear from "./pages/Footwear";
+import Order from "./pages/Order";
 
 
 function HomePage() {
@@ -58,6 +59,8 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/electronics" element={<Electronics />} />
               <Route path="/footwear" element={<Footwear />} />
+              <Route path="/order/:orderId" element={<Order />} />
+
             </Routes>
             <Footer />
           </div>
