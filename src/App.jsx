@@ -12,7 +12,7 @@ import Men from "./pages/Men";
 import Women from "./pages/Women";
 import { CartProvider } from "./context/Cartcontext";
 import Cart from "./components/Cart";
-import Register from "./components/Register";
+import SignUp from "./components/SignUp";
 import { AuthProvider } from './context/AuthContext';
 import AllCollection from "./pages/AllCollection";
 import { WishlistProvider } from "./context/WishlistContext";
@@ -49,7 +49,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<SignUp />} />
               <Route path="/men" element={<Men />} />
               <Route path="/women" element={<Women />} />
               <Route path="/cart" element={<Cart />} />

@@ -6,23 +6,29 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true); // optional
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
   const logout = async () => {
-    await signOut(auth);
-    setCurrentUser(null); // triggers reactivity
+    try {
+      await signOut(auth);
+      setCurrentUser(null);
+    } catch (err) {
+      console.error("Error during logout:", err.message);
+    }
   };
 
   return (
     <AuthContext.Provider value={{ currentUser, logout }}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
