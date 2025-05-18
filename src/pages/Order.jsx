@@ -37,22 +37,23 @@ function Order() {
   }, [currentUser, orderId]);
 
   const handleCancelOrder = async () => {
-    const confirmCancel = window.confirm("Are you sure you want to cancel this order?");
-    if (!confirmCancel) return;
+  const confirmCancel = window.confirm("Are you sure you want to cancel this order?");
+  if (!confirmCancel) return;
 
-    setIsCancelling(true);
-    try {
-      const orderRef = doc(db, "users", currentUser.uid, "orders", orderId);
-      await updateDoc(orderRef, { status: "Cancelled" });
-      setOrderData(prev => ({ ...prev, status: "Cancelled" }));
-      alert("Your order has been cancelled.");
-    } catch (error) {
-      console.error("Error cancelling order:", error);
-      alert("Failed to cancel order. Please try again.");
-    }
-    setIsCancelling(false);
-  };
+  setIsCancelling(true);
+  try {
+    const orderRef = doc(db, "users", currentUser.uid, "orders", orderId);
+    await updateDoc(orderRef, { status: "Refund Initiated" });
+    setOrderData(prev => ({ ...prev, status: "Refund Initiated" }));
+    alert("Your order has been cancelled. Refund initiated.");
+  } catch (error) {
+    console.error("Error cancelling order:", error);
+    alert("Failed to cancel order. Please try again.");
+  }
+  setIsCancelling(false);
+};
 
+  
   if (loading) return <p>Loading order details...</p>;
   if (!orderData) return <p>Order not found.</p>;
 
@@ -61,8 +62,8 @@ function Order() {
   const formattedDate = date?.toDate
     ? date.toDate().toLocaleString()
     : date
-    ? new Date(date).toLocaleString()
-    : "N/A";
+      ? new Date(date).toLocaleString()
+      : "N/A";
 
   return (
     <div className="order-detail-container">
@@ -90,14 +91,20 @@ function Order() {
       )}
 
       <h3>Total: ₹{total.toFixed(2)}</h3>
-      <h3>Payment Status: {status === "Paid" ? "✅ Paid" : "❌ Unpaid"}</h3>
+      <h3>
+        Payment Status: {
+          status === "Paid" ? "✅ Paid" :
+            status === "Refund Initiated" ? "🔄 Refund Initiated" :
+              "❌ Unpaid"
+        }
+      </h3>
       <h3>Delivery Status: {status === "Delivered" ? "✅ Delivered" : "🚚 In Transit"}</h3>
 
       {/* Show cancel button only if order is not already cancelled */}
-      {status !== "Cancelled" && (
-        <button 
-          className="cancel-btn" 
-          onClick={handleCancelOrder} 
+      {status !== "Cancelled" && status !== "Refund Initiated" &&(
+        <button
+          className="cancel-btn"
+          onClick={handleCancelOrder}
           disabled={isCancelling}
         >
           {isCancelling ? "Cancelling..." : "❌ Cancel Order"}

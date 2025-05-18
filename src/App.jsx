@@ -22,7 +22,7 @@ import Profile from "./pages/Profile";
 import Electronics from "./pages/Electronics";
 import Footwear from "./pages/Footwear";
 import Order from "./pages/Order";
-
+import Checkout from "./pages/Checkout";
 
 function HomePage() {
   return (
@@ -60,7 +60,7 @@ function App() {
               <Route path="/electronics" element={<Electronics />} />
               <Route path="/footwear" element={<Footwear />} />
               <Route path="/order/:orderId" element={<Order />} />
-
+              <Route path="/checkout" element={<Checkout />} />
             </Routes>
             <Footer />
           </div>

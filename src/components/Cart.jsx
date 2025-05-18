@@ -13,43 +13,66 @@ function Cart() {
   const { currentUser } = useAuth();
 
   const handleProceedToPayment = async () => {
-  if (cart.length === 0) {
-    alert("Your cart is empty.");
-    return;
-  }
+    if (cart.length === 0) {
+      alert("Your cart is empty.");
+      return;
+    }
 
-  if (!currentUser) {
-    alert("Please log in to place an order.");
-    return;
-  }
+    if (!currentUser) {
+      alert("Please log in to place an order.");
+      return;
+    }
 
-  const orderId = uuidv4();  // safer UUID generation
-  const orderRef = doc(db, "users", currentUser.uid, "orders", orderId);
+    const totalAmount = totalPrice.toFixed(2);
 
-  const orderData = {
-    date: serverTimestamp(),
-    products: cart.map(item => ({
-      id: item.id,
-      title: item.title,
-      image: item.image,
-      quantity: item.quantity,
-      price: item.price,
-    })),
-    total: totalPrice,
-    status: "Processing",
-    trackingId: `TRK-${Math.floor(Math.random() * 1000000)}`,
+    const options = {
+      key: "rzp_test_jhCWQoAR1ZFQsU", // Replace with your actual Razorpay Key ID
+      amount: totalAmount * 100, // Amount in paise
+      currency: "INR",
+      name: "LOOVO",
+      description: "Order Payment",
+      handler: async function (response) {
+        const orderId = uuidv4();
+        const orderRef = doc(db, "users", currentUser.uid, "orders", orderId);
+
+        const orderData = {
+          date: serverTimestamp(),
+          products: cart.map(item => ({
+            id: item.id,
+            title: item.title,
+            image: item.image,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+          total: totalPrice,
+          status: "Paid",  // <-- Set status to Paid here after successful payment
+          paymentId: response.razorpay_payment_id,
+          trackingId: `TRK-${Math.floor(Math.random() * 1000000)}`,
+        };
+
+        try {
+          await setDoc(orderRef, orderData);
+          clearCart();  // <-- this clears the cart
+          alert("✅ Payment successful & order placed!");
+          navigate(`/order/${orderId}`);
+        } catch (error) {
+          console.error("Error saving order:", error);
+          alert("❌ Payment succeeded but failed to save order.");
+        }
+      },
+      prefill: {
+        name: currentUser.displayName || "Customer",
+        email: currentUser.email,
+      },
+      theme: {
+        color: "#000000",
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
   };
 
-  try {
-    await setDoc(orderRef, orderData);
-    clearCart();
-    alert("✅ Order placed successfully!");
-    navigate(`/order/${orderId}`);
-  } catch (error) {
-    console.error("Error placing order:", error);
-    alert("❌ Error placing order: " + error.message);
-  }
-};
   return (
     <div className="cart-page">
       <h2>Your Cart</h2>
@@ -72,9 +95,7 @@ function Cart() {
         ))
       )}
 
-      <button id="buy" onClick={handleProceedToPayment}>
-        Proceed to Payment
-      </button>
+      <button id="buy" onClick={handleProceedToPayment}>Proceed to Checkout</button>
     </div>
   );
 }

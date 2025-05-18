@@ -12,10 +12,31 @@ export function CartProvider({ children }) {
 
   const { currentUser } = useAuth();
 
-  const clearCart = () => {
-  setCart([]);  // or however you reset your cart state
-  setTotalItems(0);
-  setTotalPrice(0);
+  const clearCart = async () => {
+  if (!currentUser) {
+    setCart([]);
+    setTotalItems(0);
+    setTotalPrice(0);
+    return;
+  }
+
+  try {
+    const cartRef = collection(db, 'users', currentUser.uid, 'cart');
+
+    // Get all cart items docs for the user
+    const cartSnapshot = await getDocs(cartRef);
+
+    // Delete each cart item doc
+    const deletePromises = cartSnapshot.docs.map(docSnap => deleteDoc(doc(db, 'users', currentUser.uid, 'cart', docSnap.id)));
+    await Promise.all(deletePromises);
+
+    // Clear local state
+    setCart([]);
+    setTotalItems(0);
+    setTotalPrice(0);
+  } catch (error) {
+    console.error('Error clearing cart:', error);
+  }
 };
 
 
