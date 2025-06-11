@@ -1,127 +1,135 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 .containerr {
-    display: flex;
-    flex-wrap: wrap;
-    background-color:rgb(237, 237, 237);
-    flex-direction: row;
-    width: 100%;
-    align-items: left;
-
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 35px;
+  padding: 50px 5%;
+  background-color: #f0f2f5;
 }
 
-.box{
-    flex: 1 15%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    height: fit-content;
-    width: 250px;
-    margin-bottom: 40px;
+.box {
+  background-color: #fff;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
 }
 
-.image{
-    width: 250px;
-    height: 300px;
-    overflow: hidden;
-    display: block;
-    margin: 0 auto;
-    background-color: #fff;
+.box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
-
-.text{
-    height: fit-content;
-    overflow: hidden;
-    max-width: 250px;
+.image {
+  width: 100%;
+  height: 270px;
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px;
 }
 
-.text h1{
-    font-size: 16px;
-    display: -webkit-box;
-  -webkit-line-clamp: 1;   /* Show only 2 lines */
-  -webkit-box-orient: vertical;
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.image img:hover {
+  transform: scale(1.05);
+}
+
+.text {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.text h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+  line-height: 1.4;
+  height: 3.2em;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.2em;
-  max-height: 2.4em; 
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
-.image .img {
-    width: 100px;
-    align-items: center;
-    justify-content: center;
-    display:block;
+.text p {
+  font-size: 20px;
+  color: #ff3b30;
+  font-weight: 700;
 }
 
-.box p{
-    overflow: hidden;
+.text .btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-.text p{
-    font-size: 16px;
-    color: red;
-    font-weight: 600;
+.text button {
+  cursor: pointer;
+  border: none;
+  padding: 12px 18px;
+  font-size: 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.text button:nth-of-type(1){
-    cursor: pointer;
-    margin-top: 10px;
-    margin: auto;
-    width: 70%;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    border: 3px solid black;
-    color: black;
-    font-weight: 500;
-    padding: 10px 10px;
-    cursor: pointer;
-    font-size: 16px;
+.text button:nth-of-type(1) {
+  background-color: #1e88e5;
+  color: #fff;
+  flex: 1;
 }
 
-
-.text button:nth-of-type(2){
-    padding: 10px;
-    cursor: pointer;
-    margin: auto;
-    padding-top: 10px;
-    width: 30%;
-    font-weight: 500;
-    font-size: 40px;
-}
-
-.product{
-    background-color: #fff;
-    height: fit-content;
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: right;
-
-}
-
-.product h1{
-    font-size: 16px;
-    font-weight: 500;
+.text button:nth-of-type(1):hover {
+  background-color: #1565c0;
 }
 
 .heart-button {
-  padding: 10px;
-  margin: auto;
-  width: 30%;
-  font-weight: 500;
-  font-size: 40px;
-  cursor: pointer;
+  font-size: 36px;
   background: none;
   border: none;
-  transition: transform 0.2s ease;
+  color: #bbb;
+  transition: transform 0.2s ease, color 0.2s ease;
+  align-self: flex-end;
+}
+
+.heart-button:hover {
+  transform: scale(1.3);
+  color: #ff3b30;
 }
 
 .heart-button.liked {
-  color: red;
-  transform: scale(1.1);
+  color: #ff3b30;
+  transform: scale(1.35);
+}
+
+.product {
+  padding: 25px 5%;
+  text-align: right;
+  background-color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  color: #444;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }

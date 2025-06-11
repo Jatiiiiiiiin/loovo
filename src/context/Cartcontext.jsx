@@ -13,57 +13,58 @@ export function CartProvider({ children }) {
   const { currentUser } = useAuth();
 
   const clearCart = async () => {
-  if (!currentUser) {
-    setCart([]);
-    setTotalItems(0);
-    setTotalPrice(0);
-    return;
-  }
+    if (!currentUser) {
+      setCart([]);
+      setTotalItems(0);
+      setTotalPrice(0);
+      return;
+    }
 
-  try {
-    const cartRef = collection(db, 'users', currentUser.uid, 'cart');
+    try {
+      const cartRef = collection(db, 'users', currentUser.uid, 'cart');
 
-    // Get all cart items docs for the user
-    const cartSnapshot = await getDocs(cartRef);
+      // Get all cart items docs for the user
+      const cartSnapshot = await getDocs(cartRef);
 
-    // Delete each cart item doc
-    const deletePromises = cartSnapshot.docs.map(docSnap => deleteDoc(doc(db, 'users', currentUser.uid, 'cart', docSnap.id)));
-    await Promise.all(deletePromises);
+      // Delete each cart item doc
+      const deletePromises = cartSnapshot.docs.map(docSnap => deleteDoc(doc(db, 'users', currentUser.uid, 'cart', docSnap.id)));
+      await Promise.all(deletePromises);
 
-    // Clear local state
-    setCart([]);
-    setTotalItems(0);
-    setTotalPrice(0);
-  } catch (error) {
-    console.error('Error clearing cart:', error);
-  }
-};
+      // Clear local state
+      setCart([]);
+      setTotalItems(0);
+      setTotalPrice(0);
+    } catch (error) {
+      console.error('Error clearing cart:', error);
+    }
+  };
 
 
   useEffect(() => {
-  if (!currentUser) {
-    setCart([]);        // Clear cart
-    setTotalItems(0);   // Clear total items
-    setTotalPrice(0);   // Clear total price
-    return;             // Exit early if user is not logged in
-  }
+    if (!currentUser) {
+      setCart([]);        // Clear cart
+      setTotalItems(0);   // Clear total items
+      setTotalPrice(0);   // Clear total price
+      return;             // Exit early if user is not logged in
+    }
 
-  const cartRef = collection(db, 'users', currentUser.uid, 'cart');
+    const cartRef = collection(db, 'users', currentUser.uid, 'cart');
 
-  const unsubscribe = onSnapshot(cartRef, (snapshot) => {
-    const cartItems = snapshot.docs.map(doc => doc.data());
-    let price = 0;
-    cartItems.forEach(item => price += item.price * item.quantity);
+    const unsubscribe = onSnapshot(cartRef, (snapshot) => {
+      const cartItems = snapshot.docs.map(doc => doc.data());
+      let price = 0;
+      cartItems.forEach(item => price += item.price * item.quantity);
 
-    setCart(cartItems);
-    setTotalPrice(price);
-    setTotalItems(cartItems.length);
-  });
+      setCart(cartItems);
+      setTotalPrice(price);
+      setTotalItems(cartItems.length);
+    });
 
-  return () => unsubscribe(); // Clean up listener on unmount or user switch
-}, [currentUser]);
+    return () => unsubscribe(); // Clean up listener on unmount or user switch
+  }, [currentUser]);
 
   const addToCart = async (item) => {
+    console.log("🟡 addToCart called:", item);
     if (!currentUser) {
       alert('Please log in to add items to your cart.');
       return;
@@ -71,14 +72,15 @@ export function CartProvider({ children }) {
 
     try {
       const cartRef = collection(db, 'users', currentUser.uid, 'cart');
-      const cartItemRef = doc(cartRef, item.id.toString());  // har item ko distingusish krne ke liye item.id
+      const cartItemRef = doc(cartRef, item.id.toString());
       await setDoc(cartItemRef, { ...item, quantity: item.quantity || 1 });
 
-      // refresh hone pr cheeze remain asusual isliye onSnapshot use kiya
+      console.log("✅ Item added to Firestore:", item);
     } catch (error) {
-      console.error('Error adding to cart:', error);
+      console.error("❌ Firestore error:", error);
     }
   };
+
 
   const removeFromCart = async (itemId) => {
     if (!currentUser) return;

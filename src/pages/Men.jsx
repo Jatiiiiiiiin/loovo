@@ -40,19 +40,26 @@ function Men() {
               <div className="text">
                 <h1>{product.title}</h1>
                 <p>${product.price}</p>
-                <button onClick={() => addToCart({
-                  id: product.id,
-                  title: product.title,
-                  price: product.price,
-                  image: product.image,
-                  quantity: 1,
-                })}>Add to Cart</button>
+                <button
+                  onClick={() => {
+                    console.log("🟢 Add to Cart Clicked", product);
+                    addToCart({
+                      id: product.id,
+                      title: product.title,
+                      price: product.price,
+                      image: product.image,
+                      quantity: 1,
+                    });
+                  }}
+                >
+                  Add to Cart
+                </button>
 
                 <button
                   className={`heart-button ${isInWishlist(product.id) ? 'liked' : ''}`} //ternary operator jisse pata chalega ki product wishlist me hai ya nahi
                   onClick={() => toggleWishlist(product)} //toggleWishlist function ko call karne ke liye
                 >
-                  {isInWishlist(product.id) ? '❤️' : '♡'} 
+                  {isInWishlist(product.id) ? '❤️' : '♡'}
                 </button>
               </div>
             </div>
