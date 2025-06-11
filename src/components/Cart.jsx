@@ -51,14 +51,18 @@ function Cart() {
         };
 
         try {
+          console.log("Order data being saved:", orderData);
           await setDoc(orderRef, orderData);
           clearCart();  // <-- this clears the cart
           alert("✅ Payment successful & order placed!");
           navigate(`/order/${orderId}`);
+          console.log("Order saved successfully with ID:", orderId);
         } catch (error) {
           console.error("Error saving order:", error);
           alert("❌ Payment succeeded but failed to save order.");
         }
+        
+
       },
       prefill: {
         name: currentUser.displayName || "Customer",

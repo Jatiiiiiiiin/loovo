@@ -6,26 +6,25 @@ import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 function Checkout() {
-  const { cartItems, clearCart } = useCart();
+  const { cart, clearCart } = useCart();  // ✅ corrected here
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   const handlePayment = async () => {
-    const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0); // ✅ corrected here
 
     const options = {
-      key: "rzp_test_jhCWQoAR1ZFQsU", // Replace with your Razorpay key
-      amount: totalAmount * 100, // in paise
+      key: "rzp_test_jhCWQoAR1ZFQsU",
+      amount: totalAmount * 100,
       currency: "INR",
       name: "LOOVO",
       description: "Test Transaction",
       handler: async function (response) {
         const paymentId = response.razorpay_payment_id;
 
-        // Save the order in Firestore
         const orderRef = collection(db, "users", currentUser.uid, "orders");
         await addDoc(orderRef, {
-          products: cartItems,
+          products: cart,
           total: totalAmount,
           paymentId: paymentId,
           createdAt: Timestamp.now(),
@@ -52,13 +51,13 @@ function Checkout() {
     <div style={{ padding: "2rem" }}>
       <h2>Checkout</h2>
       <ul>
-        {cartItems.map((item) => (
+        {cart.map((item) => (
           <li key={item.id}>
             {item.title} - ₹{item.price} × {item.quantity}
           </li>
         ))}
       </ul>
-      <h3>Total: ₹{cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)}</h3>
+      <h3>Total: ₹{cart.reduce((sum, item) => sum + item.price * item.quantity, 0)}</h3>
       <button onClick={handlePayment}>Pay Now</button>
     </div>
   );
