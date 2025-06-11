@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useCart } from '../context/Cartcontext';
 import { useWishlist } from '../context/WishlistContext'; // 👈 Add this
 import './men.css';
+import { Link } from 'react-router-dom';
 
 function Electronics() {
   const [products, setProducts] = useState([]);
@@ -28,32 +29,41 @@ function Electronics() {
   return (
     <>
       <div className="product">
-        <h2>Total Electronics: {products.length}</h2>
+        <h2>Total Men's Products: {products.length}</h2>
       </div>
       <div className="containerr">
         {products.map(product => (
           <div className="box" key={product.id}>
             <div className="content">
-              <div className="image">
-                <img src={product.image} alt={product.title} />
-              </div>
+              <Link to={`/product/${product.id}`} className="product-link">
+                <div className="image">
+                  <img src={product.image} alt={product.title} />
+                </div>
+              </Link>
+
               <div className="text">
                 <h1>{product.title}</h1>
                 <p>${product.price}</p>
-                <button onClick={() => addToCart({
-                  id: product.id,
-                  title: product.title,
-                  price: product.price,
-                  image: product.image,
-                  quantity: 1,
-                })}>Add to Cart</button>
+                <div className="btn-group">
+                  <button
+                    onClick={() => addToCart({
+                      id: product.id,
+                      title: product.title,
+                      price: product.price,
+                      image: product.image,
+                      quantity: 1,
+                    })}
+                  >
+                    Add to Cart
+                  </button>
 
-                <button
-                  className={`heart-button ${isInWishlist(product.id) ? 'liked' : ''}`} //ternary operator jisse pata chalega ki product wishlist me hai ya nahi
-                  onClick={() => toggleWishlist(product)} //toggleWishlist function ko call karne ke liye
-                >
-                  {isInWishlist(product.id) ? '❤️' : '♡'} 
-                </button>
+                  <button
+                    className={`heart-button ${isInWishlist(product.id) ? 'liked' : ''}`}
+                    onClick={() => toggleWishlist(product)}
+                  >
+                    {isInWishlist(product.id) ? '❤️' : '♡'}
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -23,6 +23,7 @@ import Electronics from "./pages/Electronics";
 import Footwear from "./pages/Footwear";
 import Order from "./pages/Order";
 import Checkout from "./pages/Checkout";
+import ProductDetails from "./pages/ProductDetails";
 
 function HomePage() {
   return (
@@ -61,6 +62,8 @@ function App() {
               <Route path="/footwear" element={<Footwear />} />
               <Route path="/order/:orderId" element={<Order />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/product/:productId" element={<ProductDetails />} />
+
             </Routes>
             <Footer />
           </div>
