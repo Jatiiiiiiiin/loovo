@@ -51,39 +51,41 @@ function ProductDetails() {
         </div>
 
         {/* Product Info */}
-        <div className="info">
-          <h2>{product.title}</h2>
-          <p className="price">₹{product.price}</p>
-          <p className="desc">{product.description}</p>
-          <input
-            type="text"
-            placeholder="Enter pin"
-            value={pin}
-            onChange={(e) => setPin(e.target.value)}
-          />
-          <button onClick={checkDelivery}>Check</button>
-          <p className="delivery-msg">{deliveryMsg}</p>
-        </div>
+        <div className="info-actions-wrapper">
+          <div className="info">
+            <h2>{product.title}</h2>
+            <p className="price">₹{product.price}</p>
+            <p className="desc">{product.description}</p>
+            <input
+              type="text"
+              placeholder="Enter pin"
+              value={pin}
+              onChange={(e) => setPin(e.target.value)}
+            />
+            <button onClick={checkDelivery}>Check</button>
+            <p className="delivery-msg">{deliveryMsg}</p>
+          </div>
 
-        {/* Action Buttons */}
-        <div className="actions">
-          <button className="buy-btn">Buy Now</button>
-          <button
-            className="cart-btn"
-            onClick={() =>
-              addToCart({
-                id: product.id,
-                title: product.title,
-                price: product.price,
-                image: product.image,
-                quantity: 1,
-              })
-            }
-          >
-            Add to Cart
-          </button>
+          <div className="actions">
+            <button className="buy-btn">Buy Now</button>
+            <button
+              className="cart-btn"
+              onClick={() =>
+                addToCart({
+                  id: product.id,
+                  title: product.title,
+                  price: product.price,
+                  image: product.image,
+                  quantity: 1,
+                })
+              }
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
+
 
       {/* Reviews Section */}
       <div className="reviews-section">
